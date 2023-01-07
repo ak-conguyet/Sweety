@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:sweety/MyColors.dart';
 
 class DetailsPage extends StatefulWidget {
@@ -20,7 +21,7 @@ class _DetailsPageState extends State<DetailsPage> {
         ),
         actions: [
           IconButton(
-            icon: Icon(Icons.heart_broken, color: Colors.black,),
+            icon: Icon(Iconsax.heart, color: Colors.black,),
             onPressed: (){},
           )
         ],
@@ -34,7 +35,7 @@ class _DetailsPageState extends State<DetailsPage> {
           children: [
             Center(
               child: Text(
-                  'Donu',
+                  'Donut',
                 style: TextStyle(
                   fontSize: 40,
                   fontWeight: FontWeight.w600
@@ -94,7 +95,7 @@ class _DetailsPageState extends State<DetailsPage> {
                     ),
                   ),
                   decoration: BoxDecoration(
-                    color: MyColors.color1,
+                    color: MyColors.color4,
                     borderRadius: BorderRadius.all(Radius.circular(10))
                   ),
                 ),
@@ -113,7 +114,7 @@ class _DetailsPageState extends State<DetailsPage> {
                     child: Icon(Icons.add,color: Colors.white,),
                   ),
                   decoration: BoxDecoration(
-                      color: MyColors.color1,
+                      color: MyColors.color4,
                       borderRadius: BorderRadius.all(Radius.circular(10))
                   ),
                 )
@@ -125,9 +126,23 @@ class _DetailsPageState extends State<DetailsPage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                _buildText('69 Calories'),
-                _buildText('20-30 phút'),
-                _buildText('4.9'),
+                _buildText('69 Calories','calories.png'),
+                _buildText('20-30 phút','clock.png'),
+                _buildText('4.9','star.png'),
+              ],
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Text(
+                  'Xem đánh giá',
+                  style: TextStyle(
+                    color: MyColors.color4
+                  ),
+                  )
               ],
             ),
             SizedBox(
@@ -146,6 +161,7 @@ class _DetailsPageState extends State<DetailsPage> {
             Text(
               'Design Exploration for Cake Shop App Design, This App will allow you to find the best and tastiest cakes in town for your party, you can order cakes by clicking on the link in the app and place your order right away. What do you think?',
             ),
+            
           ],
         )
       ),
@@ -161,7 +177,7 @@ class _DetailsPageState extends State<DetailsPage> {
           ),
           onPressed: (){},
           style: ElevatedButton.styleFrom(
-            backgroundColor: MyColors.color1,
+            backgroundColor: MyColors.color4,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(15))
             )
@@ -171,12 +187,19 @@ class _DetailsPageState extends State<DetailsPage> {
     );
   }
 
-  Text _buildText(String text) {
-    return Text(
+  Widget _buildText(String text,String iconName) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Image.asset('images/icons/$iconName', height: 20,width: 20,),
+        const SizedBox(width: 5,),
+        Text(
                 text,
                 style: TextStyle(
                   fontSize: 18,
                 ),
-              );
+              )
+      ],
+    );
   }
 }
