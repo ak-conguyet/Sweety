@@ -29,7 +29,7 @@ class _HomePageState extends State<HomePage> {
         headerSliverBuilder: (_,inner){
           return[
             SliverAppBar(
-              backgroundColor: MyColors.color1,
+              backgroundColor: MyColors.color2,
               expandedHeight: 350,
               flexibleSpace: FlexibleSpaceBar(
                 background: SafeArea(
@@ -94,7 +94,7 @@ class _HomePageState extends State<HomePage> {
               Container(
                 height: 50,
                 decoration: BoxDecoration(
-                  color: MyColors.color1,
+                  color: MyColors.color2,
                   borderRadius: BorderRadius.only(bottomRight: Radius.circular(50))
                 ),
               ),
@@ -227,7 +227,7 @@ class _HomePageState extends State<HomePage> {
                     );
                   },
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
+                    crossAxisCount: 2,
                     crossAxisSpacing: 5,
                     mainAxisSpacing: 5,
                     childAspectRatio: 3/4
