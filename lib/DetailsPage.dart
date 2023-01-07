@@ -93,7 +93,7 @@ class _DetailsPageState extends State<DetailsPage> {
                       ),
                     ),
                   ),
-                  decoration:const BoxDecoration(
+                  decoration: BoxDecoration(
                     color: MyColors.color1,
                     borderRadius: BorderRadius.all(Radius.circular(10))
                   ),
@@ -112,7 +112,7 @@ class _DetailsPageState extends State<DetailsPage> {
                   child: Center(
                     child: Icon(Icons.add,color: Colors.white,),
                   ),
-                  decoration:const BoxDecoration(
+                  decoration: BoxDecoration(
                       color: MyColors.color1,
                       borderRadius: BorderRadius.all(Radius.circular(10))
                   ),
