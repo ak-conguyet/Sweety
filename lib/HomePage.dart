@@ -83,7 +83,8 @@ class _HomePageState extends State<HomePage> {
                       )
                     ],
                   ),
-                )
+                ),
+                collapseMode: CollapseMode.pin,
               ),
             )
           ];
@@ -92,7 +93,7 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             children: [
               Container(
-                height: 50,
+                height: MediaQuery.of(context).padding.top,
                 decoration: BoxDecoration(
                   color: MyColors.color2,
                   borderRadius: BorderRadius.only(bottomRight: Radius.circular(50))
@@ -157,18 +158,19 @@ class _HomePageState extends State<HomePage> {
               ),
               Expanded(
                 child: GridView.builder(
+                  padding: EdgeInsets.all(10),
                   itemCount: 100,
                   itemBuilder: (_,index){
                     return GestureDetector(
                       child: Container(
                         padding: EdgeInsets.all(10),
-                        decoration: const BoxDecoration(
+                        decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.all(Radius.circular(25)),
                           boxShadow: [
                             BoxShadow(
-                              color: Colors.grey,
-                              offset: Offset(1,1),
+                              color: MyColors.color1.withOpacity(0.5),
+                              offset: Offset(4,4),
                               blurRadius: 2
                             )
                           ]
@@ -228,8 +230,8 @@ class _HomePageState extends State<HomePage> {
                   },
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
-                    crossAxisSpacing: 5,
-                    mainAxisSpacing: 5,
+                    crossAxisSpacing: 10,
+                    mainAxisSpacing: 10,
                     childAspectRatio: 3/4
                   ),
                 ),
