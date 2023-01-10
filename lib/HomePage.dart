@@ -29,7 +29,7 @@ class _HomePageState extends State<HomePage> {
         headerSliverBuilder: (_,inner){
           return[
             SliverAppBar(
-              backgroundColor: MyColors.color2,
+              backgroundColor: MyColors.color4,
               expandedHeight: 350,
               flexibleSpace: FlexibleSpaceBar(
                 background: SafeArea(
@@ -95,7 +95,7 @@ class _HomePageState extends State<HomePage> {
               Container(
                 height: MediaQuery.of(context).padding.top,
                 decoration: BoxDecoration(
-                  color: MyColors.color2,
+                  color: MyColors.color4,
                   borderRadius: BorderRadius.only(bottomRight: Radius.circular(50))
                 ),
               ),
@@ -110,7 +110,7 @@ class _HomePageState extends State<HomePage> {
                       child: Container(
                         margin: const EdgeInsets.all(5),
                         decoration: BoxDecoration(
-                          color: index == _currentIndex ? MyColors.color2 : Colors.grey.withOpacity(0.2),
+                          color: index == _currentIndex ? MyColors.color4 : Colors.grey.withOpacity(0.2),
                           borderRadius: BorderRadius.all(Radius.circular(50)),
                           boxShadow: index == _currentIndex ?
                               [
