@@ -1,7 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:sweety/DetailsPage.dart';
+import 'package:sweety/Component/CustomItemGrid.dart';
 import 'package:sweety/MyColors.dart';
+import 'package:sweety/SearchPage.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -51,7 +51,7 @@ class _HomePageState extends State<HomePage> {
                               )
                             ),
                             Expanded(child: Container()),
-                            IconButton(onPressed: (){}, icon: const Icon(Icons.search_rounded, color: Colors.white,)),
+                            IconButton(onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (_)=>SearchPage())), icon: const Icon(Icons.search_rounded, color: Colors.white,)),
                             //IconButton(onPressed: (){}, icon: const Icon(Icons.shopping_bag, color: Colors.white,))
                           ],
                         ),
@@ -156,86 +156,7 @@ class _HomePageState extends State<HomePage> {
                   },
                 ),
               ),
-              Expanded(
-                child: GridView.builder(
-                  padding: EdgeInsets.all(10),
-                  itemCount: 100,
-                  itemBuilder: (_,index){
-                    return GestureDetector(
-                      child: Container(
-                        padding: EdgeInsets.all(10),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.all(Radius.circular(25)),
-                          boxShadow: [
-                            BoxShadow(
-                              color: MyColors.color1.withOpacity(0.5),
-                              offset: Offset(4,4),
-                              blurRadius: 2
-                            )
-                          ]
-                        ),
-                        child: ClipRRect(
-                          borderRadius:const BorderRadius.all(Radius.circular(25)),
-                          child: Column(
-                            children: [
-                              Expanded(
-                                flex: 2,
-                                child: Image.asset(
-                                    'images/donut.png',
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                              Expanded(
-                                flex: 1,
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Column(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                            'Donut',
-                                          style: TextStyle(
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.bold
-                                          ),
-                                        ),
-                                        Text(
-                                            '10.000 vnd',
-                                          style: TextStyle(
-                                            fontStyle: FontStyle.italic
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                    Container(
-                                      padding: EdgeInsets.all(5),
-                                      child: Icon(Icons.add,color: Colors.white,size: 16,),
-                                      decoration: BoxDecoration(
-                                        color: MyColors.color4,
-                                        borderRadius: BorderRadius.all(Radius.circular(25))
-                                      ),
-                                    )
-                                  ],
-                                )
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                      onTap: ()=> Navigator.push(context, MaterialPageRoute(builder: (context)=> DetailsPage())),
-                    );
-                  },
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    crossAxisSpacing: 10,
-                    mainAxisSpacing: 10,
-                    childAspectRatio: 3/4
-                  ),
-                ),
-              )
+              CustomItemGrid()
             ],
           ),
         ),
@@ -246,3 +167,4 @@ class _HomePageState extends State<HomePage> {
 
 
 }
+
