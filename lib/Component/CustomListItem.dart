@@ -13,8 +13,6 @@ class CustomListItem extends StatefulWidget {
 
 class _CustomListItemState extends State<CustomListItem> {
 
-
-
   @override
   Widget build(BuildContext context) {
     return Container(

@@ -52,7 +52,7 @@ class _HomePageState extends State<HomePage> {
                             ),
                             Expanded(child: Container()),
                             IconButton(onPressed: (){}, icon: const Icon(Icons.search_rounded, color: Colors.white,)),
-                            IconButton(onPressed: (){}, icon: const Icon(Icons.shopping_bag, color: Colors.white,))
+                            //IconButton(onPressed: (){}, icon: const Icon(Icons.shopping_bag, color: Colors.white,))
                           ],
                         ),
                       ),
