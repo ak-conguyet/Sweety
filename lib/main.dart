@@ -26,11 +26,14 @@ class MyApp extends StatelessWidget {
       theme: ThemeData.from(
         colorScheme: ColorScheme.light(
           primary: MyColors.color4,
-          secondary: MyColors.color2
+          secondary: MyColors.color4
         )
       ),
       debugShowCheckedModeBanner: false,
+
       home: const App(),
+
+
     );
   }
 }
@@ -59,7 +62,7 @@ class _AppState extends State<App> {
             _currentIndex = index;
           });
         },
-        backgroundColor: MyColors.color2,
+        backgroundColor: MyColors.color4,
       )
     );
   }

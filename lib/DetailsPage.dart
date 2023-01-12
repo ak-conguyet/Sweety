@@ -10,6 +10,12 @@ class DetailsPage extends StatefulWidget {
 }
 
 class _DetailsPageState extends State<DetailsPage> {
+
+  List<String> sizeOptions = ['S','M','L'];
+  List<String> options = ['Chocolate','Strawberry','Vanilla'];
+  int? _sizeOptionsIndex;
+  int? _optionsIndex;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,6 +37,7 @@ class _DetailsPageState extends State<DetailsPage> {
       body: Container(
         width: double.infinity,
         child: ListView(
+          physics: BouncingScrollPhysics(),
           padding:const EdgeInsets.symmetric(horizontal: 20),
           children: [
             Center(
@@ -45,7 +52,7 @@ class _DetailsPageState extends State<DetailsPage> {
             Container(
               padding:const EdgeInsets.all(20),
               margin:const EdgeInsets.only(bottom: 20),
-              height: MediaQuery.of(context).size.width * 0.8,
+              height: MediaQuery.of(context).size.width * 0.6,
               child: Image.asset(
                 'images/donut.png',
                 fit: BoxFit.fitHeight,
@@ -74,6 +81,29 @@ class _DetailsPageState extends State<DetailsPage> {
                   )
                 ),
               ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            OptionList(
+              items: sizeOptions,
+              selectedColor: MyColors.color4,
+              unSelectedColor: Colors.black,
+              selectedIndex: (index){
+                setState(() {
+                  _sizeOptionsIndex = index;
+                });
+              },
+            ),
+            OptionList(
+              items: options,
+              selectedColor: MyColors.color4,
+              unSelectedColor: Colors.black,
+              selectedIndex: (index){
+                setState(() {
+                  _optionsIndex = index;
+                });
+              },
             ),
             SizedBox(
               height: 20,
@@ -127,7 +157,7 @@ class _DetailsPageState extends State<DetailsPage> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 _buildText('69 Calories','calories.png'),
-                _buildText('20-30 phút','clock.png'),
+                _buildText('20-30 Minutes','clock.png'),
                 _buildText('4.9','star.png'),
               ],
             ),
@@ -138,7 +168,7 @@ class _DetailsPageState extends State<DetailsPage> {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Text(
-                  'Xem đánh giá',
+                  'View the rating',
                   style: TextStyle(
                     color: MyColors.color4
                   ),
@@ -149,7 +179,7 @@ class _DetailsPageState extends State<DetailsPage> {
               height: 20,
             ),
             Text(
-              'Mô tả',
+              'Description',
               style: TextStyle(
                 fontSize: 25,
                 fontWeight: FontWeight.bold
@@ -170,12 +200,18 @@ class _DetailsPageState extends State<DetailsPage> {
         padding: EdgeInsets.all(15),
         child: ElevatedButton(
           child: Text(
-            'Thêm vào giỏ hàng',
+            'Add to cart',
             style: TextStyle(
               fontSize: 18
             ),
           ),
-          onPressed: (){},
+          onPressed: (){
+            if(!_checkVali()){
+              _showSnackBar();
+              return;
+            }
+
+          },
           style: ElevatedButton.styleFrom(
             backgroundColor: MyColors.color4,
             shape: RoundedRectangleBorder(
@@ -184,6 +220,42 @@ class _DetailsPageState extends State<DetailsPage> {
           ),
         ),
       ),
+    );
+  }
+
+  bool _checkVali(){
+    return _sizeOptionsIndex!=null && _optionsIndex != null;
+  }
+
+  void _showSnackBar(){
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        content: Container(
+          height: 50,
+          padding: EdgeInsets.all(5),
+          decoration:const BoxDecoration(
+            color: Colors.redAccent,
+            borderRadius: BorderRadius.all(Radius.circular(15))
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Text(
+                'Nofitication!',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold
+                ),
+              ),
+              Text(
+                'You must be choose the options!'
+              )
+            ],
+          ),
+        ),
+      )
     );
   }
 
@@ -196,10 +268,60 @@ class _DetailsPageState extends State<DetailsPage> {
         Text(
                 text,
                 style: TextStyle(
-                  fontSize: 18,
+                  fontSize: 16,
                 ),
               )
       ],
     );
   }
 }
+
+class OptionList extends StatefulWidget {
+  OptionList({
+    Key? key,
+    required this.items,
+    required this.unSelectedColor,
+    required this.selectedColor,
+    this.selectedIndex,
+  }) : super(key: key);
+  final List<String> items;
+  final Color unSelectedColor;
+  final Color selectedColor;
+  final Function(int?)? selectedIndex;
+  @override
+  State<OptionList> createState() => _OptionListState();
+}
+
+class _OptionListState extends State<OptionList> {
+
+  int? _selectedIndex;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 30,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemCount: widget.items.length,
+        itemBuilder: (_,index) => GestureDetector(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 5,horizontal: 10),
+            child: Text(
+              widget.items[index],
+              style: TextStyle(
+                  color: _selectedIndex == null || _selectedIndex!=index ? widget.unSelectedColor : widget.selectedColor,
+                fontWeight: FontWeight.bold,
+                fontSize: 16
+              ),
+            ),
+          ),
+          onTap: ()=>setState((){
+            _selectedIndex = index;
+            widget.selectedIndex?.call(index);
+          }),
+        ),
+      )
+    );
+  }
+}
+
