@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sweety/Component/CustomFavoriteItem.dart';
 
 class FavoritePage extends StatefulWidget {
   const FavoritePage({Key? key}) : super(key: key);
@@ -10,6 +11,14 @@ class FavoritePage extends StatefulWidget {
 class _FavoritePageState extends State<FavoritePage> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      body: ListView.builder(
+        physics: BouncingScrollPhysics(),
+        itemCount: 10,
+        itemBuilder: (_,index){
+          return CustomFavoriteItem();
+        },
+      ),
+    );
   }
 }
