@@ -127,8 +127,7 @@ class _LoginState extends State<Login> {
                   Text(
                     'or use other method',
                     style: TextStyle(
-                        fontSize: 12,
-                        fontStyle: FontStyle.italic
+                        fontSize: 12, fontStyle: FontStyle.italic
                     ),
                   ),
                   const SizedBox(height: 10,),

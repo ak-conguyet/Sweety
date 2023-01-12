@@ -6,6 +6,7 @@ import 'package:sweety/CartPage.dart';
 import 'package:sweety/Favoritepage.dart';
 import 'package:sweety/MyColors.dart';
 import 'package:sweety/ProfilePage.dart';
+import 'package:sweety/SignUpPage.dart';
 import 'package:sweety/main.dart';
 import 'HomePage.dart';
 import 'Login.dart';
@@ -29,7 +30,7 @@ class MyApp extends StatelessWidget {
         )
       ),
       debugShowCheckedModeBanner: false,
-      home:const CartPage(),
+      home: const App(),
     );
   }
 }
