@@ -1,3 +1,4 @@
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:sweety/MyColors.dart';
@@ -15,6 +16,7 @@ class _DetailsPageState extends State<DetailsPage> {
   List<String> options = ['Chocolate','Strawberry','Vanilla'];
   int? _sizeOptionsIndex;
   int? _optionsIndex;
+  bool _isChecked = false;
 
   @override
   Widget build(BuildContext context) {
@@ -27,8 +29,13 @@ class _DetailsPageState extends State<DetailsPage> {
         ),
         actions: [
           IconButton(
-            icon: Icon(Iconsax.heart, color: Colors.black,),
-            onPressed: (){},
+            icon: Icon(
+              Icons.favorite,
+              color: _isChecked ? Colors.red : Colors.black,
+            ),
+            onPressed: ()=>setState(() {
+              _isChecked = !_isChecked;
+            }),
           )
         ],
         elevation: 0, 
@@ -69,7 +76,7 @@ class _DetailsPageState extends State<DetailsPage> {
                       ),
                     ),
                     TextSpan(
-                      text: '10.000',
+                      text: '16.0',
                       style: TextStyle(
                         color: Colors.black,
                       )
@@ -210,7 +217,6 @@ class _DetailsPageState extends State<DetailsPage> {
               _showSnackBar();
               return;
             }
-
           },
           style: ElevatedButton.styleFrom(
             backgroundColor: MyColors.color4,
@@ -232,29 +238,11 @@ class _DetailsPageState extends State<DetailsPage> {
       SnackBar(
         elevation: 0,
         backgroundColor: Colors.transparent,
-        content: Container(
-          height: 50,
-          padding: EdgeInsets.all(5),
-          decoration:const BoxDecoration(
-            color: Colors.redAccent,
-            borderRadius: BorderRadius.all(Radius.circular(15))
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Text(
-                'Nofitication!',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold
-                ),
-              ),
-              Text(
-                'You must be choose the options!'
-              )
-            ],
-          ),
-        ),
+        content:AwesomeSnackbarContent(
+          title: 'Nofitication!',
+          message:'You must be choose the options!',
+          contentType: ContentType.failure,
+        )
       )
     );
   }

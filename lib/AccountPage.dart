@@ -9,6 +9,7 @@ class AccountPage extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: ListView(
+        physics: BouncingScrollPhysics(),
         children: [
           Column(
             mainAxisSize: MainAxisSize.min,
