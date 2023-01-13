@@ -8,6 +8,9 @@ class OdersPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+      ),
       body: SafeArea(
         child: ListView.builder(
           physics:const BouncingScrollPhysics(),
