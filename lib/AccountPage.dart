@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:sweety/MyColors.dart';
+import 'package:sweety/OdersPage.dart';
 
 class AccountPage extends StatelessWidget {
   const AccountPage({Key? key}) : super(key: key);
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
         child: ListView(
-        physics: BouncingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         children: [
           Column(
             mainAxisSize: MainAxisSize.min,
@@ -27,7 +29,7 @@ class AccountPage extends StatelessWidget {
               ),
             ],
           ),
-          _billAndaddressBuilder(),
+          _billAndaddressBuilder(context),
           _itemBuider(
               iconName: 'avatar_none.png',
               text: 'Account'
@@ -90,7 +92,7 @@ class AccountPage extends StatelessWidget {
         );
   }
 
-  Container _billAndaddressBuilder() {
+  Container _billAndaddressBuilder(BuildContext context) {
     return Container(
           height: 75,
           decoration:const BoxDecoration(
@@ -128,9 +130,7 @@ class AccountPage extends StatelessWidget {
                         ],
                       ),
                     ),
-                    onTap: (){
-
-                    },
+                    onTap:()=>Navigator.push(context, MaterialPageRoute(builder: (_)=>OdersPage())),
                   ),
                 ),
               ),
