@@ -48,7 +48,7 @@ class App extends StatefulWidget {
 class _AppState extends State<App> {
 
   final List<Widget> _page = const [HomePage(),CartPage(),FavoritePage(),AccountPage()];
-  final List<Widget> _icons = const [Icon(Iconsax.home),Icon(Iconsax.shopping_cart),Icon(Iconsax.heart),Icon(Iconsax.profile_circle),];
+  final List<Widget> _icons = const [Icon(Icons.home),Icon(Icons.shopping_cart),Icon(Icons.favorite),Icon(Icons.person),];
   int _currentIndex = 0;
 
   @override
