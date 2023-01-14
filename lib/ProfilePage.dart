@@ -1,6 +1,5 @@
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
-import 'package:sweety/main.dart';
 
 class Profilepage extends StatefulWidget {
   const Profilepage({Key? key}) : super(key: key);
@@ -26,6 +25,7 @@ class _ProfilepageState extends State<Profilepage> {
     enterPassController = TextEditingController();
     reEnterPassController = TextEditingController();
     enterPassController.addListener(() {
+
       if(enterPassController.value.text.isNotEmpty){
         _isChangePass = true;
         if(enterPassController.text.length > 5){
@@ -136,7 +136,7 @@ class _ProfilepageState extends State<Profilepage> {
 
   Widget _buildTextField({String? defaultText, required String label, TextEditingController? controller, bool isPassword:false}){
     return Padding(
-      padding: EdgeInsets.all(10),
+      padding:const EdgeInsets.all(10),
       child: TextFormField(
         initialValue: defaultText,
         controller: controller,

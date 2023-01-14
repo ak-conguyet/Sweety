@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sweety/LocationManagement.dart';
 import 'package:sweety/MyColors.dart';
 import 'package:sweety/OdersPage.dart';
 import 'package:sweety/ProfilePage.dart';
@@ -38,7 +39,7 @@ class AccountPage extends StatelessWidget {
           ),
           _itemBuider(
             iconName: 'coupon.png',
-            text: 'Ví coupon'
+            text: 'Ví coupon',
             ),
           _itemBuider(
               iconName: 'wallet.png',
@@ -120,7 +121,7 @@ class AccountPage extends StatelessWidget {
                       )
                     ),
                   ),
-                  child: GestureDetector(
+                  child: InkWell(
                     child: Center(
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
@@ -149,7 +150,7 @@ class AccountPage extends StatelessWidget {
                         )
                     ),
                   ),
-                  child: GestureDetector(
+                  child: InkWell(
                     child: Center(
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
@@ -164,9 +165,7 @@ class AccountPage extends StatelessWidget {
                         ],
                       ),
                     ),
-                    onTap: (){
-
-                    },
+                      onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (_)=> LocationManagement()))
                   ),
                 ),
               ),
