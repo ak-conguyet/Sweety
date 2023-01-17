@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:sweety/CouponBoxPage.dart';
 import 'package:sweety/LocationManagement.dart';
 import 'package:sweety/MyColors.dart';
 import 'package:sweety/OdersPage.dart';
 import 'package:sweety/ProfilePage.dart';
+import 'PaymentManagement.dart';
 
 class AccountPage extends StatelessWidget {
   const AccountPage({Key? key}) : super(key: key);
@@ -40,14 +42,16 @@ class AccountPage extends StatelessWidget {
           _itemBuider(
             iconName: 'coupon.png',
             text: 'Ví coupon',
+            onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (_)=>const CouponBoxPage())),
             ),
           _itemBuider(
               iconName: 'wallet.png',
-              text: 'Quản lý thanh toán'
+              text: 'Quản lý thanh toán',
+              onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (_)=> const PaymentManagement()))
             ),
           _itemBuider(
               iconName: 'star.png',
-              text: 'Đánh giá'
+              text: 'Đánh giá',
             ),
           _itemBuider(
               iconName: 'nofitication.png',

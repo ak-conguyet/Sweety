@@ -1,6 +1,5 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:iconsax/iconsax.dart';
 import 'package:sweety/AccountPage.dart';
 import 'package:sweety/CartPage.dart';
 import 'package:sweety/Favoritepage.dart';
@@ -15,6 +14,7 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   // This widget is the root of your application.
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -47,6 +47,7 @@ class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: _page[_currentIndex],
       bottomNavigationBar: CurvedNavigationBar(
         items: _icons,
