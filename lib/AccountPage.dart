@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:sweety/LocationManagement.dart';
 import 'package:sweety/MyColors.dart';
 import 'package:sweety/OdersPage.dart';
+import 'package:sweety/ProfilePage.dart';
 
 class AccountPage extends StatelessWidget {
   const AccountPage({Key? key}) : super(key: key);
@@ -32,11 +34,12 @@ class AccountPage extends StatelessWidget {
           _billAndaddressBuilder(context),
           _itemBuider(
               iconName: 'avatar_none.png',
-              text: 'Account'
+              text: 'Account',
+            onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (_)=>const Profilepage()))
           ),
           _itemBuider(
             iconName: 'coupon.png',
-            text: 'Ví coupon'
+            text: 'Ví coupon',
             ),
           _itemBuider(
               iconName: 'wallet.png',
@@ -64,32 +67,35 @@ class AccountPage extends StatelessWidget {
     );
   }
 
-  Container _itemBuider({required String iconName, required String text}) {
-    return Container(
-          padding:const EdgeInsets.all(10),
-          height: 75,
-          decoration:const BoxDecoration(
+  Widget _itemBuider({required String iconName, required String text, Function? onTap}) {
+    return InkWell(
+      onTap: ()=>onTap?.call(),
+      child: Container(
+        padding:const EdgeInsets.all(10),
+        height: 75,
+        decoration:const BoxDecoration(
             border: Border(
-              bottom: BorderSide(
-                color: Colors.grey,
-                width: 0.5
-              )
+                bottom: BorderSide(
+                    color: Colors.grey,
+                    width: 0.5
+                )
             )
-          ),
-          child: Row(
-            children: [
-              Image.asset('images/icons/$iconName',width: 30,height: 30,fit: BoxFit.cover,),
-              const SizedBox(width: 10,),
-              Text(
-                  text,
-                style:const TextStyle(
+        ),
+        child: Row(
+          children: [
+            Image.asset('images/icons/$iconName',width: 30,height: 30,fit: BoxFit.cover,),
+            const SizedBox(width: 10,),
+            Text(
+              text,
+              style:const TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.bold
-                ),
-              )
-            ],
-          ),
-        );
+              ),
+            )
+          ],
+        ),
+      ),
+    );
   }
 
   Container _billAndaddressBuilder(BuildContext context) {
@@ -115,7 +121,7 @@ class AccountPage extends StatelessWidget {
                       )
                     ),
                   ),
-                  child: GestureDetector(
+                  child: InkWell(
                     child: Center(
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
@@ -144,7 +150,7 @@ class AccountPage extends StatelessWidget {
                         )
                     ),
                   ),
-                  child: GestureDetector(
+                  child: InkWell(
                     child: Center(
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
@@ -159,9 +165,7 @@ class AccountPage extends StatelessWidget {
                         ],
                       ),
                     ),
-                    onTap: (){
-
-                    },
+                      onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (_)=> LocationManagement()))
                   ),
                 ),
               ),
