@@ -4,6 +4,7 @@ import 'package:sweety/AccountPage.dart';
 import 'package:sweety/CartPage.dart';
 import 'package:sweety/Favoritepage.dart';
 import 'package:sweety/MyColors.dart';
+import 'package:sweety/RateAndCmtPage.dart';
 import 'HomePage.dart';
 
 void main() {
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
         )
       ),
       debugShowCheckedModeBanner: false,
-      home:const App(),
+      home: RateAndCmtPage(),
     );
   }
 }
