@@ -1,12 +1,9 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:iconsax/iconsax.dart';
 import 'package:sweety/AccountPage.dart';
 import 'package:sweety/CartPage.dart';
 import 'package:sweety/Favoritepage.dart';
 import 'package:sweety/MyColors.dart';
-
-import 'HomePage.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,6 +13,7 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   // This widget is the root of your application.
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -27,10 +25,14 @@ class MyApp extends StatelessWidget {
         )
       ),
       debugShowCheckedModeBanner: false,
+<<<<<<< HEAD
 
       home: const App(),
 
 
+=======
+      home: RateAndCmtPage(),
+>>>>>>> b5a8593b1fc4f8d819f468b186c9d5ba5b5b93dd
     );
   }
 }
@@ -51,6 +53,7 @@ class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: _page[_currentIndex],
       bottomNavigationBar: CurvedNavigationBar(
         items: _icons,

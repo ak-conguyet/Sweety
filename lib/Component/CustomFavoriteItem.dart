@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_stars/flutter_rating_stars.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:iconsax/iconsax.dart';
 import 'package:sweety/MyColors.dart';
 
 class CustomFavoriteItem extends StatefulWidget {
