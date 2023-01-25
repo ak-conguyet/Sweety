@@ -2,6 +2,7 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sweety/AccountPage.dart';
+import 'package:sweety/CartBloc/CartBloc.dart';
 import 'package:sweety/CartPage.dart';
 import 'package:sweety/Favoritepage.dart';
 import 'package:sweety/Login.dart';
@@ -29,7 +30,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: MultiBlocProvider(
         providers: [
-          BlocProvider(create: (_)=>Login_Bloc())
+          BlocProvider(create: (_)=>Login_Bloc()),
+          BlocProvider(create: (_)=>CartBloc())
         ],
         child: Login(),
       ),

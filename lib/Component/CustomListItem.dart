@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_stars/flutter_rating_stars.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:sweety/Models/Products.dart';
 import 'package:sweety/MyColors.dart';
 
 class CustomListItem extends StatefulWidget {
-  CustomListItem({Key? key, this.onChecked, this.checked:false}) : super(key: key);
+  CustomListItem({Key? key, this.onChecked, this.checked:false, required this.product}) : super(key: key);
   final Function(bool)? onChecked;
+  final Product product;
   bool checked;
   @override
   State<CustomListItem> createState() => _CustomListItemState();
@@ -51,7 +53,7 @@ class _CustomListItemState extends State<CustomListItem> {
                   child: Row(
                     children: [
                       ClipRRect(
-                        child: Image.asset('images/products/oreo_cookie.jpg'),
+                        child: Image.network(widget.product.image, width: 75,height:75,fit: BoxFit.cover,),
                         borderRadius: BorderRadius.all(Radius.circular(15)),
                       ),
                       const SizedBox(
@@ -63,7 +65,7 @@ class _CustomListItemState extends State<CustomListItem> {
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               Text(
-                                'Oreo Ice Cream',
+                                widget.product.name,
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 18,
@@ -72,7 +74,7 @@ class _CustomListItemState extends State<CustomListItem> {
                                 overflow: TextOverflow.ellipsis,
                               ),
                               RatingStars(
-                                value: 3.5,
+                                value: widget.product.rating,
                                 starBuilder: (index,color){
                                   return Icon(Icons.star,color: color,);
                                 },
@@ -89,7 +91,7 @@ class _CustomListItemState extends State<CustomListItem> {
                                           )
                                       ),
                                       TextSpan(
-                                          text: '16.0',
+                                          text: widget.product.prices.toString(),
                                           style: TextStyle(
                                               fontSize: 18
                                           )
