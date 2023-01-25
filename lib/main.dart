@@ -1,8 +1,11 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sweety/AccountPage.dart';
 import 'package:sweety/CartPage.dart';
 import 'package:sweety/Favoritepage.dart';
+import 'package:sweety/Login.dart';
+import 'package:sweety/LoginBloc/LoginBloc.dart';
 import 'package:sweety/MyColors.dart';
 
 import 'HomePage.dart';
@@ -13,9 +16,7 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
   // This widget is the root of your application.
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -28,9 +29,16 @@ class MyApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
 
-      home: const App(),
+      home: MultiBlocProvider(
+        providers: [
+          BlocProvider(create: (_)=>Login_Bloc())
+        ],
+        child: Login(),
+      ),
+
     );
   }
+
 }
 
 class App extends StatefulWidget {
