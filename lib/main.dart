@@ -5,6 +5,8 @@ import 'package:sweety/CartPage.dart';
 import 'package:sweety/Favoritepage.dart';
 import 'package:sweety/MyColors.dart';
 
+import 'HomePage.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -25,14 +27,8 @@ class MyApp extends StatelessWidget {
         )
       ),
       debugShowCheckedModeBanner: false,
-<<<<<<< HEAD
 
       home: const App(),
-
-
-=======
-      home: RateAndCmtPage(),
->>>>>>> b5a8593b1fc4f8d819f468b186c9d5ba5b5b93dd
     );
   }
 }

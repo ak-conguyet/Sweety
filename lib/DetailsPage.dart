@@ -288,9 +288,9 @@ class _OptionListState extends State<OptionList> {
             onTap: () => setState(() {
               _selectedIndex = index;
               widget.selectedIndex?.call(index);
-              if(widget.selectedIndex != null){
+             /* if(widget.selectedIndex != null){
                 widget.selectedIndex!(index);
-              }
+              }*/
             }),
           ),
         ));
