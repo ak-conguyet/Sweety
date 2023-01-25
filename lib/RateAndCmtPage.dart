@@ -4,12 +4,12 @@ import 'package:flutter_rating_stars/flutter_rating_stars.dart';
 class RateAndCmtPage extends StatelessWidget {
   RateAndCmtPage({Key? key}) : super(key: key);
 
-  List<Emj> _listIcon = [
-    Emj('Yumi', 'fat-emoji.png'),
-    Emj('Fresh and clean', 'leaf.png'),
-    Emj('Nice packaging', 'bag.png'),
-    Emj('Eat full', 'hamburger.png'),
-    Emj('Worth of money', 'save-money.png')
+  final List<Emj> _listIcon = [
+    const Emj('Yumi', 'fat-emoji.png'),
+    const Emj('Fresh and clean', 'leaf.png'),
+    const Emj('Nice packaging', 'bag.png'),
+    const Emj('Eat full', 'hamburger.png'),
+    const Emj('Worth of money', 'save-money.png')
   ];
 
   @override
@@ -136,6 +136,8 @@ class RateAndCmtPage extends StatelessWidget {
                 expandedTitleScale: 1,
               ),
               backgroundColor: Colors.white,
+              snap: true,
+              floating: true,
             ),
           ];
         },
@@ -201,10 +203,8 @@ class RateAndCmtPage extends StatelessWidget {
   }
 
 }
-
 class Emj {
   final String icon;
   final String text;
-
   const Emj(this.text, this.icon);
 }
