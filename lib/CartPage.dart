@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:sweety/CartBloc/CartBloc.dart';
+import 'package:sweety/CartBloc/CartEvent.dart';
+import 'package:sweety/CartBloc/CartState.dart';
 import 'package:sweety/Component/CustomListItem.dart';
+import 'package:sweety/Models/Products.dart';
 import 'package:sweety/MyColors.dart';
 
 class CartPage extends StatefulWidget {
@@ -13,10 +18,14 @@ class CartPage extends StatefulWidget {
 
 class _CartPageState extends State<CartPage>
     with SingleTickerProviderStateMixin {
+
   bool _checkAll = false;
   int _selectProductCount = 0;
   List<bool> checkList = List.filled(10, false);
   int arrLength = 10;
+  CartBloc _bloc = CartBloc();
+
+
 
   void _countProduct() {
     int count = 0;
@@ -46,20 +55,45 @@ class _CartPageState extends State<CartPage>
           ),
           elevation: 0,
         ),
-        body: SafeArea(
+        body: BlocBuilder<CartBloc,CartState>(
+          bloc:  _bloc,
+          builder: (context,state){
+            if(state is Cart_Initical){
+              _bloc.add(Cart_request());
+              return _buidLoading();
+            }
+
+            if(state is Cart_Loading)
+              return _buidLoading();
+
+            if(state is Cart_Successful)
+              return _bodyBuider(state.products);
+
+            return _buidLoading();
+          }
+        )
+    );
+  }
+
+  Widget _buidLoading()=>Center(
+    child: CircularProgressIndicator(),
+  );
+
+  Widget _bodyBuider(List<Product> products)=>SafeArea(
           child: Stack(
             children: [
               ListView.builder(
                 shrinkWrap: true,
                 physics: const BouncingScrollPhysics(),
-                itemCount: arrLength + 1,
+                itemCount: products.length + 1,
                 itemBuilder: (context, index) {
-                  if (index == 10) {
+                  if (index == products.length) {
                     return Container(
                       height: 150,
                     );
                   }
                   return CustomListItem(
+                    product: products[index],
                     checked: checkList[index],
                     onChecked: (v) {
                       setState(() {
@@ -196,7 +230,6 @@ class _CartPageState extends State<CartPage>
               )
             ],
           ),
-        )
-    );
-  }
+        );
+
 }
