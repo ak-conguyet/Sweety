@@ -4,6 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sweety/AccountPage.dart';
 import 'package:sweety/CartBloc/CartBloc.dart';
 import 'package:sweety/CartPage.dart';
+import 'package:sweety/EditAddressPage.dart';
+import 'package:sweety/FavoriteBloc/FavoriteBloc.dart';
 import 'package:sweety/Favoritepage.dart';
 import 'package:sweety/Login.dart';
 import 'package:sweety/LoginBloc/LoginBloc.dart';
@@ -28,16 +30,11 @@ class MyApp extends StatelessWidget {
         )
       ),
       debugShowCheckedModeBanner: false,
-      home: MultiBlocProvider(
-        providers: [
-          BlocProvider(create: (_)=>Login_Bloc()),
-          BlocProvider(create: (_)=>CartBloc())
-        ],
-        child: Login(),
+      home: Login(
+        bloc: Login_Bloc(),
       ),
     );
   }
-
 }
 
 class App extends StatefulWidget {
@@ -49,7 +46,7 @@ class App extends StatefulWidget {
 
 class _AppState extends State<App> {
 
-  final List<Widget> _page = const [HomePage(),CartPage(),FavoritePage(),AccountPage()];
+  final List<Widget> _page =  [HomePage(),CartPage(),FavoritePage(),AccountPage()];
   final List<Widget> _icons = const [Icon(Icons.home),Icon(Icons.shopping_cart),Icon(Icons.favorite),Icon(Icons.person),];
   int _currentIndex = 0;
 

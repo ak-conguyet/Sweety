@@ -13,6 +13,21 @@ void showSnackBar(BuildContext context,{required ContentType contentType, requir
         )));
 }
 
-void startActivity(BuildContext context, Widget target)=>Navigator.of(context).push(MaterialPageRoute(builder: (_)=>target));
+Future<T?> startActivity<T>(BuildContext context, Widget target){
+  return Navigator.of(context).push<T>(
+    PageRouteBuilder(
+      pageBuilder: (context,animation, secondaryAnimation) => target,
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        var tween = Tween<double>(begin: 0, end: 1).chain(CurveTween(curve: Curves.easeInOutQuad,));
+        return ScaleTransition(
+          scale: animation.drive(tween),
+          child: child,
+        );
+      },
+    )
+  );
+}
 
-void startActivityWithFinishCurrent(BuildContext context, Widget target)=>Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (_)=>target),((route) => false));
+void startActivityAndFinishCurrent(BuildContext context, Widget target){
+  Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (_)=>target),(route)=>false);
+}

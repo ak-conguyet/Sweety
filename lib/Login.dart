@@ -1,9 +1,10 @@
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sweety/Component/CustomBloc.dart';
 import 'package:sweety/Component/CustomLoginButton.dart';
 import 'package:sweety/Component/CustomTextFile.dart';
+import 'package:sweety/Component/LoadingSc.dart';
 import 'package:sweety/LoginBloc/LoginBloc.dart';
 import 'package:sweety/LoginBloc/LoginEvent.dart';
 import 'package:sweety/LoginBloc/LoginState.dart';
@@ -13,66 +14,39 @@ import 'package:sweety/Utils/Utils.dart';
 import 'package:sweety/main.dart';
 
 
-class Login extends StatefulWidget {
-  const Login({Key? key}) : super(key: key);
+class Login extends CustomBloc<Login_Bloc,LoginState>{
 
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController  _passController = TextEditingController();
+
+  Login({required super.bloc});
   @override
-  State<Login> createState() => _LoginState();
-}
+  void listener(BuildContext context, LoginState state) {
+    if(state is Login_Successful){
+      startActivityAndFinishCurrent(context, const App());
+    }
 
-class _LoginState extends State<Login> {
-
-  late TextEditingController _emailController;
-  late TextEditingController _passController;
-  Login_Bloc _bloc = Login_Bloc();
-
-
-  @override
-  void initState() {
-    super.initState();
-    _emailController = TextEditingController();
-    _passController = TextEditingController();
+    if(state is Login_Failure){
+      showSnackBar(context, contentType: ContentType.failure, title: 'Login failure!', message: state.exp);
+    }
   }
 
+
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: BlocConsumer<Login_Bloc,LoginState>(
-      bloc: _bloc,
-      listener: ((context, state) {
-        if(state is Login_Successful){
-          startActivityWithFinishCurrent(context, App());
-        }
+  Widget stateBuilder(LoginState state) {
+    if(state is Login_Loading){
+      return LoadingAni();
+    }
 
-        if(state is Login_Failure){
-          showSnackBar(
-            context, 
-            contentType: ContentType.failure, 
-            title: 'Login failure', 
-            message: state.exp
-            );
-        }
+    if(state is Login_Successful){
+      return LoadingAni();
+    }
 
-      }),
-      builder: (context, state){
-
-        if(state is Login_Loading){
-          return _loading();
-        }
-
-
-        return _loginScreen();
-      },
-    )
-    );
+    return _loginScreen();
   }
 
-  Widget _loading()=>Center(
-    child: CircularProgressIndicator(),
-  );
-
-
-  Widget _loginScreen()=>Stack(
+  Widget _loginScreen()=>Scaffold(
+    body: Stack(
       children: [
         Container(
           height: MediaQuery.of(context).size.width,
@@ -120,14 +94,14 @@ class _LoginState extends State<Login> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   CustomTextField(
-                      hintText:'Username or Email' ,
-                      controller: _emailController,
+                    hintText:'Username or Email' ,
+                    controller: _emailController,
                   ),
                   const SizedBox(height: 20,),
                   CustomTextField(
                     hintText: 'Password',
                     controller: _passController,
-                    ),
+                  ),
                   const SizedBox(height: 20,),
                   GestureDetector(
                     child: Text(
@@ -143,7 +117,7 @@ class _LoginState extends State<Login> {
                     width: double.infinity,
                     child: ElevatedButton(
                       onPressed: (){
-                        _bloc.add(Login_request(_emailController.text,_passController.text));
+                        bloc.add(Login_request(_emailController.text,_passController.text));
                       },
                       child:const Text('LOGIN'),
                       style: ElevatedButton.styleFrom(
@@ -203,7 +177,8 @@ class _LoginState extends State<Login> {
           ],
         )
       ],
-    );
+    ),
+  );
 
 }
 

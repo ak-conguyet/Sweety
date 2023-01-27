@@ -1,21 +1,15 @@
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sweety/CartBloc/CartEvent.dart';
-import 'package:sweety/CartBloc/CartState.dart';
-import 'package:sweety/Models/Products.dart';
+import 'package:sweety/SearchBloc/SearchEvent.dart';
+import 'package:sweety/SearchBloc/SearchState.dart';
 
-class CartBloc extends Bloc<CartEvent,CartState>{
-  CartBloc():super(Cart_Initical()){
-    on<Cart_request>((event, emit) => _request());
+import '../Models/Products.dart';
+
+class SeachBloc extends Bloc<SearchEvent,SearchState>{
+  SeachBloc():super(SearchState.Initical){
+    on<SearchEvent>((event, emit) => _searching(event));
   }
-
-  void _request() async{
-
-    emit(Cart_Loading());
-
-    await Future.delayed(Duration(seconds: 2));
-
-    List<Product> products = [
+  List<Product> products = [
       Product(
         id: '1',
         name: 'Donut', 
@@ -82,9 +76,11 @@ class CartBloc extends Bloc<CartEvent,CartState>{
         image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Brigitte_Tohm_2016-10-10_%28Unsplash%29.jpg/1200px-Brigitte_Tohm_2016-10-10_%28Unsplash%29.jpg', 
         ),
     ];
-
-    emit(Cart_Successful(products));
-
+  void _searching(SearchEvent event) async{
+    emit(SearchState.Loading);
+    await Future.delayed(Duration(seconds: 2));
+    emit(SearchState.Successful);
   }
+
 
 }

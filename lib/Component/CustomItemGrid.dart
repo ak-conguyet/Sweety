@@ -1,30 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_stars/flutter_rating_stars.dart';
 import 'package:sweety/DetailsPage.dart';
+import 'package:sweety/Models/Products.dart';
 import 'package:sweety/MyColors.dart';
 
 class CustomItemGrid extends StatelessWidget {
-  const CustomItemGrid({
+  const CustomItemGrid(this.product,{
     Key? key,
   }) : super(key: key);
+
+  final List<Product> product;
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
       child: GridView.builder(
-        padding: EdgeInsets.all(10),
-        itemCount: 100,
+        physics: const BouncingScrollPhysics(),
+        padding: const EdgeInsets.all(10),
+        itemCount: product.length,
         itemBuilder: (_,index){
           return GestureDetector(
             child: Container(
-              padding: EdgeInsets.all(10),
+              padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
                   color: Colors.white,
-                  borderRadius: BorderRadius.all(Radius.circular(25)),
+                  borderRadius: const BorderRadius.all(Radius.circular(25)),
                   boxShadow: [
                     BoxShadow(
                         color: MyColors.color1.withOpacity(0.5),
-                        offset: Offset(4,4),
+                        offset: const Offset(4,4),
                         blurRadius: 2
                     )
                   ]
@@ -35,8 +39,8 @@ class CustomItemGrid extends StatelessWidget {
                   children: [
                     Expanded(
                       flex: 2,
-                      child: Image.asset(
-                        'images/donut.png',
+                      child: Image.network(
+                        product[index].image,
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -51,14 +55,14 @@ class CustomItemGrid extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Donut',
+                                  product[index].name,
                                   style: TextStyle(
                                       fontSize: 18,
                                       fontWeight: FontWeight.bold
                                   ),
                                 ),
                                 RatingStars(
-                                  value: 3.5,
+                                  value: product[index].rating,
                                   starBuilder: (index,color){
                                     return Icon(Icons.star,color: color,size: 12,);
                                   },
@@ -75,7 +79,7 @@ class CustomItemGrid extends StatelessWidget {
                                             )
                                         ),
                                         TextSpan(
-                                            text: '16.0',
+                                            text: '${product[index].prices}',
                                             style: TextStyle(
                                                 fontSize: 18
                                             )

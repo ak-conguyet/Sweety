@@ -5,9 +5,12 @@ import 'package:sweety/Models/Products.dart';
 import 'package:sweety/MyColors.dart';
 
 class CustomListItem extends StatefulWidget {
-  CustomListItem({Key? key, this.onChecked, this.checked:false, required this.product}) : super(key: key);
+  CustomListItem({Key? key, this.onChecked, this.checked:false, required this.product, this.onValueChange, this.value = 1, this.minValue = 1}) : super(key: key);
   final Function(bool)? onChecked;
+  final Function(int)? onValueChange;
+  final int minValue;
   final Product product;
+  int value;
   bool checked;
   @override
   State<CustomListItem> createState() => _CustomListItemState();
@@ -41,7 +44,7 @@ class _CustomListItemState extends State<CustomListItem> {
                   padding:const EdgeInsets.all(10),
                   decoration: BoxDecoration(
                       color: Colors.white,
-                      borderRadius: BorderRadius.all(Radius.circular(25)),
+                      borderRadius: const BorderRadius.all(Radius.circular(25)),
                       boxShadow: [
                         BoxShadow(
                             color: MyColors.color1.withOpacity(0.5),
@@ -53,7 +56,9 @@ class _CustomListItemState extends State<CustomListItem> {
                   child: Row(
                     children: [
                       ClipRRect(
-                        child: Image.network(widget.product.image, width: 75,height:75,fit: BoxFit.cover,),
+                        child: Image.network(
+                          widget.product.image, width: 75,height:75,fit: BoxFit.cover,
+                        ),
                         borderRadius: BorderRadius.all(Radius.circular(15)),
                       ),
                       const SizedBox(
@@ -120,13 +125,19 @@ class _CustomListItemState extends State<CustomListItem> {
                                 ),
                                 child: Icon(FontAwesomeIcons.add,size: 14,color: Colors.white,),
                               ),
+                              onTap: (){
+                                setState(() {
+                                  widget.value ++;
+                                });
+                                widget.onValueChange?.call(widget.value);
+                              },
                             ),
                             SizedBox(
                                 width: 45,
                                 height: 25,
                                 child: Center(
                                   child: Text(
-                                    '2',
+                                    '${widget.value}',
                                     style: TextStyle(
                                         fontSize: 16,
                                         fontWeight: FontWeight.bold
@@ -144,6 +155,14 @@ class _CustomListItemState extends State<CustomListItem> {
                                 ),
                                 child: Icon(FontAwesomeIcons.minus,size: 14,color: Colors.white,),
                               ),
+                              onTap: (){
+                                if(widget.value > widget.minValue){
+                                  setState(() {
+                                    widget.value --;
+                                  });
+                                  widget.onValueChange?.call(widget.value);
+                                }
+                              },
                             )
                           ],
                         ),

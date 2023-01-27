@@ -1,7 +1,8 @@
 
 abstract class HomeEvent {}
 
-class Home_request_category extends HomeEvent{}
-
-class Home_request_listProduct extends HomeEvent{}
+class Home_request extends HomeEvent{
+  final String? categoryId;
+  Home_request({this.categoryId});
+}
 

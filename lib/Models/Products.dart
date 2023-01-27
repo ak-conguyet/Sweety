@@ -1,6 +1,7 @@
 
 class Product{
 
+  final String id;
   final String name;
   final String description;
   final List<String> sizeOtp;
@@ -10,9 +11,11 @@ class Product{
   final double rating;
   final double prices;
   final String image;
-  final bool isFavorite;
+  bool isFavorite;
+  int count;
 
-  const Product({
+   Product({
+    required this.id,
     required this.name,required this.description, 
     required this.sizeOtp,
     required this.otp,
@@ -22,6 +25,7 @@ class Product{
     required this.prices,
     required this.image,
     this.isFavorite : false,
+    this.count = 0
     });
 
 }

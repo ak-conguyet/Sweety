@@ -100,7 +100,9 @@ class CouponBoxPage extends StatelessWidget {
                         ),
                       ),
                     ),
-                    onTap: (){},
+                    onTap: (){
+                      Navigator.pop(context,'TET50K');
+                    },
                   ),
                 )
               ],

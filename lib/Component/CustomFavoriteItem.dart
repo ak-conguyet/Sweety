@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_stars/flutter_rating_stars.dart';
+import 'package:sweety/FavoriteBloc/FavoriteBloc.dart';
+import 'package:sweety/Models/Products.dart';
 import 'package:sweety/MyColors.dart';
 
 class CustomFavoriteItem extends StatefulWidget {
-  const CustomFavoriteItem({Key? key}) : super(key: key);
-
+  CustomFavoriteItem(this.product,{Key? key,required this.parentBloc}) : super(key: key);
+  Product product;
+  final FavoriteBloc parentBloc;
   @override
   State<CustomFavoriteItem> createState() => _CustomFavoriteItemState();
 }
 
 class _CustomFavoriteItemState extends State<CustomFavoriteItem> {
-
-  bool _isLiked = true;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +23,7 @@ class _CustomFavoriteItemState extends State<CustomFavoriteItem> {
       padding:const EdgeInsets.all( 10),
       decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.all(Radius.circular(25)),
+          borderRadius: const BorderRadius.all(Radius.circular(25)),
           boxShadow: [
             BoxShadow(
                 color: MyColors.color1.withOpacity(0.5),
@@ -33,8 +35,8 @@ class _CustomFavoriteItemState extends State<CustomFavoriteItem> {
       child: Row(
         children: [
           ClipRRect(
-            borderRadius: BorderRadius.all(Radius.circular(15)),
-            child: Image.asset('images/products/oreo_cookie.jpg'),
+            borderRadius: const BorderRadius.all(Radius.circular(15)),
+            child: Image.network(widget.product.image,width: 100,height: 100,fit: BoxFit.cover,),
           ),
           const SizedBox(
             width: 10,
@@ -45,7 +47,7 @@ class _CustomFavoriteItemState extends State<CustomFavoriteItem> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Text(
-                    'Oreo Ice Cream',
+                    '${widget.product.name}',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 18,
@@ -54,7 +56,7 @@ class _CustomFavoriteItemState extends State<CustomFavoriteItem> {
                     overflow: TextOverflow.ellipsis,
                   ),
                   RatingStars(
-                    value: 3.5,
+                    value: widget.product.rating,
                     starBuilder: (index,color){
                       return Icon(Icons.star,color: color,);
                     },
@@ -71,7 +73,7 @@ class _CustomFavoriteItemState extends State<CustomFavoriteItem> {
                               )
                           ),
                           TextSpan(
-                              text: '16.0',
+                              text: '${widget.product.prices}',
                               style: TextStyle(
                                   fontSize: 18
                               )
@@ -89,16 +91,25 @@ class _CustomFavoriteItemState extends State<CustomFavoriteItem> {
           Center(
             child: IconButton(
               onPressed: ()=>setState(() {
-                _isLiked = !_isLiked;
+                widget.product.isFavorite = !widget.product.isFavorite;
               }),
               icon: Icon(
                 Icons.favorite,
-                color: _isLiked ? Colors.red : Colors.black,
+                color: widget.product.isFavorite ? Colors.red : Colors.black,
               ),
             )
           )
         ],
       ),
     );
+  }
+
+  @override
+  void deactivate() {
+    super.deactivate();
+    if(!widget.product.isFavorite){
+      widget.parentBloc.removeProduct(widget.product.id);
+      print('remove ${widget.product.name}');
+    }
   }
 }
