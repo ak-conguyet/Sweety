@@ -97,6 +97,15 @@ class Login extends CustomBloc<Login_Bloc,LoginState>{
                     hintText:'Username or Email' ,
                     controller: _emailController,
                   ),
+
+                  SizedBox(height: 10,),
+                  Text(
+                    'or use other method',
+                    style: TextStyle(
+                        fontSize: 12, fontStyle: FontStyle.italic
+                    )
+                  ),
+
                   const SizedBox(height: 20,),
                   CustomTextField(
                     hintText: 'Password',
@@ -109,6 +118,7 @@ class Login extends CustomBloc<Login_Bloc,LoginState>{
                       style: TextStyle(
                           color: Colors.grey
                       ),
+
                     ),
                   ),
                   const SizedBox(height: 20,),
