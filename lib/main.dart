@@ -4,12 +4,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sweety/AccountPage.dart';
 import 'package:sweety/CartBloc/CartBloc.dart';
 import 'package:sweety/CartPage.dart';
+import 'package:sweety/CupponDetailsPage.dart';
 import 'package:sweety/EditAddressPage.dart';
 import 'package:sweety/FavoriteBloc/FavoriteBloc.dart';
 import 'package:sweety/Favoritepage.dart';
 import 'package:sweety/Login.dart';
 import 'package:sweety/LoginBloc/LoginBloc.dart';
 import 'package:sweety/MyColors.dart';
+import 'package:sweety/SearchPage.dart';
 
 import 'HomePage.dart';
 
@@ -27,13 +29,14 @@ class MyApp extends StatelessWidget {
       theme: ThemeData.from(
         colorScheme: ColorScheme.light(
           primary: MyColors.color4,
-          secondary: MyColors.color4
-        )
+          secondary: MyColors.color4,
+        ),
       ),
       debugShowCheckedModeBanner: false,
-      home: Login(
-        bloc: Login_Bloc(),
-      )
+      // home: Login(
+      //   bloc: Login_Bloc(),
+      // )
+      home: CupponDetailsPage(),
 
 
     );

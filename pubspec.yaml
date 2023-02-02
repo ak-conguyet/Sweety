@@ -43,6 +43,7 @@ dependencies:
   awesome_snackbar_content: ^0.1.0
   flutter_bloc: ^8.1.1
   equatable: ^2.0.5
+  carousel_slider: ^4.2.1
 
 dev_dependencies:
   flutter_test:
@@ -68,7 +69,10 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - images/    - images/icons/    - images/products/
+    - images/
+    - images/icons/
+    - images/products/
+    - images/banner/
 
 
     # - images/a_dot_ham.jpeg

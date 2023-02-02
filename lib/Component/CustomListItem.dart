@@ -78,13 +78,20 @@ class _CustomListItemState extends State<CustomListItem> {
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                               ),
-                              RatingStars(
-                                value: widget.product.rating,
-                                starBuilder: (index,color){
-                                  return Icon(Icons.star,color: color,);
-                                },
-                                valueLabelVisibility: false,
-                                starSize: 18,
+                              Row(
+                                children: [
+                                  Text(
+                                    'S - Chocolate',
+                                    style: TextStyle(
+                                        fontSize: 12
+                                    ),
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 1,
+                                  ),
+                                  SizedBox(width: 20,),
+                                  Text('3.5'),
+                                  Icon(Icons.star,size: 15,color: Colors.yellow,),
+                                ],
                               ),
                               RichText(
                                 text: TextSpan(

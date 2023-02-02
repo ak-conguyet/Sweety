@@ -1,3 +1,4 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:sweety/Component/CustomBloc.dart';
 import 'package:sweety/Component/CustomItemGrid.dart';
@@ -11,97 +12,79 @@ import 'package:sweety/HomeBloc/HomeState.dart';
 import 'package:sweety/Models/Categories.dart';
 import 'package:sweety/MyColors.dart';
 import 'package:sweety/SearchPage.dart';
+import 'package:sweety/Utils/Utils.dart';
 
 class HomePage extends StatelessWidget {
    HomePage({Key? key}) : super(key: key);
   final HomeBloc _contentBloc = HomeBloc();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: NestedScrollView(
           headerSliverBuilder: (_,inner){
             return[
-              SliverAppBar(
-                backgroundColor: MyColors.color4,
-                expandedHeight: 350,
-                flexibleSpace: FlexibleSpaceBar(
-                  background: SafeArea(
-                    child: Column(
-                      children: [
-                        Container(
-                          height: 75,
-                          child: Row(
-                            children: [
-                              const Padding(
-                                  padding: EdgeInsets.only(left: 10),
-                                  child: Text(
-                                    "Sweety",
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold
-                                    ),
-                                  )
-                              ),
-                              Expanded(child: Container()),
-                              IconButton(onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (_)=>SearchPage())), icon: const Icon(Icons.search_rounded, color: Colors.white,)),
-                              //IconButton(onPressed: (){}, icon: const Icon(Icons.shopping_bag, color: Colors.white,))
-                            ],
-                          ),
-                        ),
-                        Expanded(
-                          child: Container(
-                            height: 300,
-                            child: Stack(
-                              children: [
-                                Positioned(
-                                    right: 0,
-                                    child: Image.asset('images/donut.png',width: 250,height: 250,)
-                                ),
-                                const Positioned(
-                                    left: 20,
-                                    bottom: 20,
-                                    child: Text(
-                                      'Top\nPicks',
-                                      style: TextStyle(
-                                          fontSize: 50,
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold
-                                      ),
-                                    )
-                                )
-                              ],
+              SliverToBoxAdapter(
+                child: SafeArea(
+                  child: Column(
+                    children: [
+                      CarouselSlider.builder(
+                        itemCount: 15,
+                        itemBuilder: (BuildContext context, int itemIndex, int pageViewIndex) =>
+                            Container(
+                              margin: const EdgeInsets.symmetric(vertical: 10,horizontal: 5),
+                              width: double.infinity,
+                              child: Image.asset('images/banner/banner.jpg', fit: BoxFit.fitWidth,)
                             ),
+                        options: CarouselOptions(
+                            autoPlay: true,
+                            autoPlayInterval:const Duration(seconds: 3),
+                            aspectRatio: 18/9
+                        ),
+                      ),
+                      Container(
+                        height: 50,
+                        margin:const EdgeInsets.symmetric(horizontal: 10),
+                        padding: const EdgeInsets.all(5),
+                        decoration: BoxDecoration(
+                            color: Colors.grey.withOpacity(0.2),
+                            borderRadius:const BorderRadius.all(Radius.circular(15))
+                        ),
+                        child: TextFormField(
+                          maxLines: 1,
+                          decoration: const InputDecoration(
+                              border: InputBorder.none,
+                              hintText: 'Type something',
+                              prefixIcon: Icon(Icons.search)
                           ),
-                        )
-                      ],
-                    ),
+                          textInputAction: TextInputAction.search,
+                          onFieldSubmitted: (values){
+                            startActivity(context, SearchPage(values));
+                          },
+                        ),
+                      )
+                    ],
                   ),
-                  collapseMode: CollapseMode.pin,
                 ),
-              )
+              ),
             ];
           },
-          body: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Container(
-                height: MediaQuery.of(context).padding.top,
-                decoration: BoxDecoration(
-                    color: MyColors.color4,
-                    borderRadius: const BorderRadius.only(bottomRight: Radius.circular(50))
+          body: SafeArea(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                SizedBox(
+                  height: 140,
+                  child: _CategorybarB(_contentBloc),
                 ),
-              ),
-              SizedBox(
-                height: 140,
-                child: _CategorybarB(_contentBloc),
-              ),
-              Expanded(child: SizedBox(child: _Content(bloc: _contentBloc)))
-            ],
+                Expanded(child: SizedBox(child: _Content(bloc: _contentBloc)))
+              ],
+            ),
           ),
         )
     );
   }
+
 }
 
 class _Content extends CustomBloc<HomeBloc, HomeState>{

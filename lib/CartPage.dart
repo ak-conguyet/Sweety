@@ -53,14 +53,13 @@ class _ContentBuider extends StatefulWidget {
 }
 
 class _ContentBuiderState extends State<_ContentBuider> {
+
   bool _checkAll = false;
   int _selectProductCount = 0;
   late int _length;
   late List<bool> checkList;
   double totalPrices = 0;
   String? cupon;
-  CartBloc _bloc = CartBloc();
-
 
   @override
   void initState() {
@@ -92,7 +91,6 @@ class _ContentBuiderState extends State<_ContentBuider> {
         }
       }
     });
-    print(_length);
   }
 
   @override
@@ -113,23 +111,7 @@ class _ContentBuiderState extends State<_ContentBuider> {
           ),
           elevation: 0,
         ),
-        body: BlocBuilder<CartBloc,CartState>(
-            bloc:  _bloc,
-            builder: (context,state){
-              if(state is Cart_Initical){
-                _bloc.add(Cart_request());
-                return _buidLoading();
-              }
-
-              if(state is Cart_Loading)
-                return _buidLoading();
-
-              if(state is Cart_Successful)
-                return _bodyBuider(state.products);
-
-              return _buidLoading();
-            }
-        )
+        body: _bodyBuider(widget.products)
     );
   }
 
@@ -276,7 +258,7 @@ class _ContentBuiderState extends State<_ContentBuider> {
                               style: TextStyle(fontSize: 15),
                             ),
                             Text(
-                              '\$ ${totalPrices}',
+                              '\$ ${totalPrices.roundToDouble()}',
                               style: TextStyle(
                                   color: Colors.redAccent,
                                   fontSize: 20,

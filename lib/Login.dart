@@ -99,13 +99,6 @@ class Login extends CustomBloc<Login_Bloc,LoginState>{
                   ),
 
                   SizedBox(height: 10,),
-                  Text(
-                    'or use other method',
-                    style: TextStyle(
-                        fontSize: 12, fontStyle: FontStyle.italic
-                    )
-                  ),
-
                   const SizedBox(height: 20,),
                   CustomTextField(
                     hintText: 'Password',

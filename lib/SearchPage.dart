@@ -7,7 +7,8 @@ import 'package:sweety/SearchBloc/SearchEvent.dart';
 import 'package:sweety/SearchBloc/SearchState.dart';
 
 class SearchPage extends StatefulWidget {
-  const SearchPage({Key? key}) : super(key: key);
+  const SearchPage(this.value,{Key? key}) : super(key: key);
+  final String value;
 
   @override
   State<SearchPage> createState() => _SearchPageState();
@@ -24,33 +25,13 @@ class _SearchPageState extends State<SearchPage> {
       appBar: AppBar(
         elevation: 0,
         centerTitle: true,
-        title: Row(
-          children: [
-            Expanded(
-              child:Card(
-                child: TextField(
-                  controller: _controller,
-                  decoration: const InputDecoration(
-                      hintText: 'Please type the keyword',
-                      hintStyle: TextStyle(
-                          fontSize: 12
-                      ),
-                      contentPadding: EdgeInsets.all(5)
-                  ),
-                ),
-              ),
-            ),
-            IconButton(
-                onPressed: (){
-                  _bloc.add(SearchEvent(_controller.text));
-                },
-                icon: const Icon(Icons.search)
-            )
-          ],
+        title: Text(
+          'Result for: ${widget.value} '
         ),
       ),
       body: SafeArea(
         child: _BodyBuild(
+          widget.value,
           bloc: _bloc,
         )
       ),
@@ -60,7 +41,8 @@ class _SearchPageState extends State<SearchPage> {
 }
 
 class _BodyBuild extends CustomBloc<SeachBloc,SearchState>{
-  _BodyBuild({required super.bloc});
+  _BodyBuild(this.value,{required super.bloc});
+  final String value;
 
   @override
   void listener(BuildContext context, SearchState state) {
@@ -70,6 +52,7 @@ class _BodyBuild extends CustomBloc<SeachBloc,SearchState>{
   @override
   Widget stateBuilder(SearchState state) {
     if(state == SearchState.Initical){
+      bloc.add(SearchEvent(value));
       return SafeArea(child: Container());
     }
 

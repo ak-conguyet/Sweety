@@ -27,3 +27,5 @@ abstract class CustomBloc<B extends StateStreamable<S>,S> extends StatelessWidge
   bool listennerWhen(S state)=>true;
   bool buildwhen(S s1, S s2)=>true;
 }
+
+
